@@ -1,0 +1,57 @@
+﻿@model Web_Roda_Llantas.Entities.ProductosEntities
+
+@{
+    ViewData["Title"] = "RegistrarProductos";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Registrar Producto</h4>
+
+                @using (Html.BeginForm("RegistrarProductos", "Productos", FormMethod.Post, new { @class = "forms-sample" }))
+                {
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Prod_Nombre">Nombre del Producto</label>
+                            @Html.TextBoxFor(m => m.Prod_Nombre, new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_Descripcion">Descripcion del Producto</label>
+                            @Html.TextBoxFor(m => m.Prod_Descripcion, new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_Marca">Marca del Producto</label>
+                            @Html.TextBoxFor(m => m.Prod_Marca, new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_Precio">Precio del Producto</label>
+                            @Html.TextBoxFor(m => m.Prod_Precio, new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_CantStock">Cantidad en Stock</label>
+                            @Html.TextBoxFor(m => m.Prod_CantStock, new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_Proveedor_Id">Nombre del Proveedor</label>
+                            @Html.DropDownListFor(m => m.Prod_Proveedor_Id, (IEnumerable<SelectListItem>)ViewBag.OpcionesProveedores, "Seleccione un Proveedor", new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_TipoProducto_Id">Nombre del Tipo de Producto</label>
+                            @Html.DropDownListFor(m => m.Prod_TipoProducto_Id, (IEnumerable<SelectListItem>)ViewBag.OpcionesProductos, "Seleccione un Tipo de Producto", new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Prod_Url_Img">URL de la Imagen del Producto</label>
+                            @Html.TextBoxFor(m => m.Prod_Url_Img, new { @class="form-control form-control-sm", @required = true})
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary mr-2" value="Crear Producto">
+                }
+            </div>
+        </div>
+    </div>
+</div>

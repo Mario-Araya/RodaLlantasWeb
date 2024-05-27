@@ -1,0 +1,148 @@
+﻿@model Web_Roda_Llantas.Entities.ReservacionesEntities
+
+@{
+    ViewData["Title"] = "RegistrarVehiculoYReservacion";
+     Layout = "~/Views/Shared/_LayoutCliente2.cshtml";
+}
+
+<style>
+	#reservarServicios {
+		display: none
+	}
+
+	.container {
+		text-align: center;
+	}
+
+	
+	.card-title {
+		color: black;
+	}
+
+</style>
+
+<div class="three_box py-5">
+	<div class="container">
+		<!-- Título central -->
+		<div class="row">
+			<div class="col text-center">
+				<h2>Solicita tu cita en 3 sencillos pasos</h2>
+				<hr> <!-- Una línea horizontal para separar el título de las cajas -->
+			</div>
+		</div>
+
+		<!-- Contenido de las cajas -->
+		<div class="row mt-4">
+			<!-- mt-4 para agregar espacio entre el título y las cajas -->
+			<div class="col-md-4 text-center">
+				<i class="fas fa-car fa-3x mb-3"></i> <!-- Icono de coche -->
+				<h3>Registra tu Vehiculo</h3>
+				<p>Comienza por darnos algunos detalles sobre tu vehículo. Esta información nos ayudará a personalizar los servicios adecuados para tu auto.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<i class="fas fa-cogs fa-3x mb-3"></i> <!-- Icono de engranajes -->
+				<h3>Selecciona los servicios</h3>
+				<p>Elige los servicios que necesitas. Ya sea un cambio de llantas, alineación, balanceo u otros, estamos aquí para ayudarte.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<i class="fas fa-envelope fa-3x mb-3"></i> <!-- Icono de sobre -->
+				<h3>Te confirmaremos por correo</h3>
+				<p>Una vez que hayas completado tu solicitud, te enviaremos un correo de confirmación con los detalles de tu cita. ¡Así de fácil!</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="card">
+	<div class="card-body">
+<div class="row">
+
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				@if (@ViewBag.mensaje != null)
+				{
+					<p>***@ViewBag.mensaje***</p>
+
+					<br />
+					<hr />
+
+				}
+
+				<h2 class="card-title">Reservar Servicios</h2>
+
+				@using (Html.BeginForm("RegistrarVehiculoYReservacion", "Reservaciones", FormMethod.Post, new { @class = "forms-sample" }))
+				{
+					<input name="Res_Usuario_Id" value="@Context.Session.GetString("Usu_Id")?.ToString()" style="display: none">
+
+					<fieldset id="vehiculo">
+						<legend>Indique la información de su vehículo:</legend>
+						<hr />
+
+								<div class="row">
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="placa">Placa:</label>
+											@Html.TextBoxFor(m => m.Veh_Id, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="Veh_Marca">Marca:</label>
+											@Html.TextBoxFor(m => m.Veh_Marca, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="Veh_Modelo">Modelo:</label>
+											@Html.TextBoxFor(m => m.Veh_Modelo, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-6">
+										<div class="form-group">
+											<label for="Veh_Fecha_Lanzamiento">Fecha Lanzamiento:</label>
+											@Html.TextBoxFor(m => m.Veh_Fecha_Lanzamiento, new { @class = "form-control", @required = true })
+										</div>
+									</div>
+								</div>
+						<hr />
+					</fieldset>
+
+				/*<p id="Usuario_Correo">@Context.Session.GetString("Correo")?.ToString()</p>*/
+					<input name="Usuario_Correo" id="Usuario_Correo" value="@Context.Session.GetString("Correo")?.ToString()" hidden />
+
+					<fieldset id="Servicios">
+						<legend>Seleccione los servicios:</legend>
+						<hr />
+
+						@foreach (var item in ViewBag.Servicios)
+						{
+							<div class="row" style="padding-left: 30px">
+								<div class="col-6" style="font-size: large">
+									<input type="checkbox" name="ServiciosReservados" value="@item.Ser_Id" onchange="mostrarFecha(this)"> @item.Ser_Nombre <br>
+								</div>
+								<div class="col-4" style="display: none">
+									<label for="FechasServiciosReservados"> Fecha: </label>
+									<input type="date" id="FechasServiciosReservados" name="FechasServiciosReservados" onchange="">
+								</div>
+							</div>
+							<hr>
+							
+						}
+
+						<div class="container"> <input type="submit" class="btn btn-primary mr-2" value="Reservar" style="width: 300px" > </div>
+						<p style="text-align: center; font-size: small; color: gray;">*Se debe seleccionar al menos un servicio y su fecha</p>
+					</fieldset>
+				}
+						<hr>
+						<br>
+						<br>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<br>
+<script src="~/js/FuncionesReservacion.js"></script>

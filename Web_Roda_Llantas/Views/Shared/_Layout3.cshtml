@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RodaLlantas</title>
+    <link rel="shortcut icon" href="~/template/images/icon-wheel.png" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        #sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        @@media (max-width: 992px) {
+            #sidebar {
+                display: none;
+            }
+
+            #menu-icon {
+                display: inline-block !important;
+            }
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar,
+        .nav-link,
+        .btn-danger,
+        .bg-dark {
+            background-color: #343a40 !important;
+            color: #ffffff !important;
+        }
+
+            .nav-link:hover {
+                color: rgba(255, 255, 255, 0.75) !important;
+            }
+
+        .page-body-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        .menu-title {
+            font-size: larger; /* o puedes especificar un tamaño específico, como '20px' o '1.5em' */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid page-body-wrapper">
+        <!-- Button to show the menu in mobile view -->
+        <button id="menu-icon" style="display: none; z-index: 9999;" class="btn btn-dark" onclick="toggleSidebar()">☰</button>
+
+        <div class="row main-content">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar" id="sidebar">
+                <!-- ... código del menú ... -->
+                <!-- Logo de la Empresa -->
+                <div class="navbar navbar-dark bg-dark py-3 d-flex justify-content-center">
+                    <a class="navbar-brand d-flex align-items-center" href="#">
+                        <img src="~/img/Logo.jpeg" alt="Logo RodaLlantas" width="60" height="60" class="d-inline-block align-top mr-2">
+                        
+                    </a>
+                    <h1 class="mb-0">RodaLlantas</h1>
+                </div>
+                <div class="text-white text-center mt-2">
+                    Bienvenido administrador
+                </div>
+
+
+                <!-- Links del Menú -->
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Principal", "Home")">
+                            <i class="fas fa-home"></i>
+                            <span class="menu-title"> Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#usuarios" aria-expanded="false" aria-controls="usuarios">
+                            <i class="fas fa-users"></i>
+                            <span class="menu-title">Usuarios</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="usuarios">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("ConsultarUsuarios", "Usuarios")">Consulta de Usuarios</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#servicios" aria-expanded="false" aria-controls="servicios">
+                            <i class="fas fa-tools"></i>
+                            <span class="menu-title">Servicios</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="servicios">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarServicios","Servicios")">Lista de Servicios</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#compras" aria-expanded="false" aria-controls="compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="menu-title">Compras</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="compras">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("Listar","Compras")">Lista Compras</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#vehiculos" aria-expanded="false" aria-controls="vehiculos">
+                            <i class="fas fa-car"></i>
+                            <span class="menu-title">Vehiculos</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="vehiculos">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarVehiculos","Vehiculos")">Lista de Vehículos</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#proovedores" aria-expanded="false" aria-controls="proovedores">
+                            <i class="fas fa-handshake"></i>
+                            <span class="menu-title">Proveedores</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="proovedores">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProveedores","Proveedores")">Información</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#productos" aria-expanded="false" aria-controls="productos">
+                            <i class="fas fa-box"></i>
+                            <span class="menu-title">Productos</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="productos">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarProductos", "Productos")">Consultar</a></li>
+                            </ul>
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("RegistrarProductos", "Productos")">Registrar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#reservaciones" aria-expanded="false" aria-controls="reservaciones">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span class="menu-title"> Reservaciones</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="reservaciones">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("ConsultarReservaciones","Reservaciones")">Consultar</a></li>
+                            </ul>
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("RegistrarReservacion", "Reservaciones")">Reservar</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                   
+                </ul>
+                <div class="mt-4">
+                    <a href="@Url.Action("CerrarSesion", "Home")" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
+                </div>
+                
+            </nav>
+
+            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-0">
+                <br />
+                @RenderBody()
+
+            </div>
+            <footer class="bg-dark text-white text-center py-3 w-100">
+                Roda Llantas de Turrialba S.A. © 2023.
+            </footer>
+        </div>
+       
+    </div>
+   
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("sidebar");
+            if (sidebar.style.display === "none") {
+                sidebar.style.display = "block";
+            } else {
+                sidebar.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
